@@ -1,31 +1,45 @@
-// main.js
+// main.js (Ajustado)
 
-const loginBtn = document.getElementById('login');
+// Obtenemos referencias a los botones
+const loginBtn    = document.getElementById('login');
+const registerBtn = document.getElementById('registerBtn');
 
 try {
-  // 1) Llamamos a un endpoint local: /api/auth/profile
-  //    Devuelve { name, email, etc. } si el user está logueado, 
-  //    o 401 / 403 / algo si no lo está
-  const resp = await fetch('/api/auth/profile');
-  if (resp.ok) {
-    // Usuario logueado => Modo "Logout"
-    const user = await resp.json();
-    loginBtn.innerText = `Logout (${user.name})`;
+  // Verificamos si hay tokens en sessionStorage
+  const accessToken = sessionStorage.getItem('accessToken');
+  const idToken     = sessionStorage.getItem('idToken');
+
+  if (accessToken && idToken) {
+    // Usuario logueado
+    loginBtn.textContent = 'Logout';
     loginBtn.onclick = () => {
-      // 2) Para desloguear, a) mandar al logout local 
-      //    (que internamente llama al logout de Cognito)
-      window.location.replace('/api/auth/logout');
+      sessionStorage.clear();
+      window.location.replace('https://api.ottoapis.com/auth/logout');
     };
+
+    // (Opcional) ocultas el registerBtn si ya estás logueado
+    if (registerBtn) {
+      registerBtn.style.display = 'none';
+    }
+
   } else {
-    // Usuario no logueado => Modo "Login"
-    loginBtn.innerText = 'Login';
+    // Usuario no logueado
+    loginBtn.textContent = 'Login';
     loginBtn.onclick = () => {
-      // 3) Redirigir a /api/auth/login => tu back-end redirige a Cognito
-      window.location.replace('/api/auth/login');
+      window.location.replace('https://api.ottoapis.com/auth/login');
     };
+
+    // Manejo de Signup
+    if (registerBtn) {
+      registerBtn.onclick = () => {
+        window.location.replace('https://api.ottoapis.com/auth/signup');
+      };
+    }
   }
-  // Una vez configurado, lo mostramos
-  loginBtn.style.visibility = 'visible';
+
+  // Mostrar los botones al final
+  if (loginBtn)    loginBtn.style.visibility    = 'visible';
+  if (registerBtn) registerBtn.style.visibility = 'visible';
 
 } catch (err) {
   alert('No se pudo inicializar la aplicación.');

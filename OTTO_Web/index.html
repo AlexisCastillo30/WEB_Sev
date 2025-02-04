@@ -2,23 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Autodesk - Home</title>
+  <title>OTTO - Home</title>
   <link rel="stylesheet" href="../assets/css/styles.css" />
 </head>
 <body>
   <header class="header">
     <div class="header-container">
       <div class="logo">
-        <!-- <img src="https://cdn-aps-app.s3.us-east-2.amazonaws.com/Logo_SinFondo.png" alt="Logo" class="logo-image"> -->
+        <img src="https://cdn-aps-app.s3.us-east-2.amazonaws.com/Logo_SinFondo.png" alt="Logo" class="logo-image">
       </div> 
       <nav class="nav">
         <ul class="nav-list">
-          <li><a href="../services/index.html" class="nav-link active">Home</a></li>
-          <!-- <li><a href="../pages/products.html" class="nav-link">Products</a></li>
+          <li><a href="../index.html" class="nav-link active">Home</a></li>
+          <li><a href="../pages/products.html" class="nav-link">Products</a></li>
           <li><a href="../pages/portfolio.html" class="nav-link">Portfolio</a></li>
           <li><a href="../pages/company.html" class="nav-link">Company</a></li>
           <li><a href="../pages/company.html" class="nav-link">Contact</a></li>
-          <li><a href="../pages/company.html" class="nav-link">Blog</a></li> -->
+          <li><a href="../pages/company.html" class="nav-link">Blog</a></li>
           <li>
             <a href="/pages/profile.html"
                class="nav-link"
@@ -28,9 +28,10 @@
         </ul>
       </nav>
       <div class="auth-buttons">
-        <!-- Agregamos IDs para controlarlos vía scripts.js -->
-        <a href="/auth/login" class="btn login-btn" id="loginBtn">Login</a>
-        <a href="/auth/signup" class="btn register-btn" id="registerBtn">Register</a>
+        <!-- Sustituimos los <a> por <button> -->
+        <button class="btn login-btn"    id="loginBtn">Login</button>
+        <button class="btn register-btn" id="registerBtn">Register</button>
+        
         <button
           id="logoutBtn"
           class="btn logout-btn"
@@ -47,10 +48,41 @@
     </div>
   </header>
 
+  <main class="main">
+    <!-- Hero Section -->
+    <section class="home-hero">
+      <h1 class="main-heading">Bienvenido a OTTO</h1>
+      <p class="main-description">
+        En <strong>OTTO</strong>, transformamos la industria AEC (Arquitectura, Ingeniería y Construcción) 
+        con soluciones avanzadas de BIM (Building Information Modeling). 
+        Nuestra misión es maximizar el valor de tus modelos digitales, 
+        asegurando calidad, eficiencia y sostenibilidad en cada proyecto.
+      </p>
+      <p class="main-description">
+        Desde la revisión de estándares y automatización hasta la implementación de gemelos digitales 
+        y dashboards en tiempo real, OTTO es tu socio estratégico para la transformación BIM. 
+        Descubre cómo revolucionamos tus proyectos.
+      </p>
+    </section>
 
+    <section class="modules-overview">
+      <h2 class="section-title">Nuestros Módulos</h2>
+      <!-- ... tu contenido ... -->
+    </section>
+
+    <section class="call-to-action">
+      <h2 class="cta-heading">¿Listo para transformar tus proyectos con OTTO?</h2>
+      <p class="cta-description">
+        Explora nuestra sección de productos para descubrir todas nuestras soluciones BIM, 
+        visita nuestro portafolio para conocer casos de éxito, 
+        y aprende más sobre nuestra empresa en la sección de compañía.
+      </p>
+      <button class="btn cta-btn">Descubre Más</button>
+    </section>
+  </main>
 
   <footer class="footer">
-    <p class="footer-text">© 2025 . All rights reserved. Proudly based in Colombia.</p>
+    <p class="footer-text">© 2025 OTTO. All rights reserved. Proudly based in Colombia.</p>
   </footer>
 
   <!-- Scripts comunes -->
@@ -59,7 +91,6 @@
   <script>
     // Al cargar la página, revisamos si ya hay tokens
     document.addEventListener('DOMContentLoaded', () => {
-      // console.log("Home: DOMContentLoaded");
       checkAuthAndUpdateUI();
     });
   </script>
