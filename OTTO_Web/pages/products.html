@@ -22,12 +22,32 @@
           <li><a href="../pages/products.html" class="nav-link active">Products</a></li>
           <li><a href="../pages/portfolio.html" class="nav-link">Portfolio</a></li>
           <li><a href="../pages/company.html" class="nav-link">Company</a></li>
+          <li><a href="../pages/company.html" class="nav-link">Contact</a></li>
+          <li><a href="../pages/company.html" class="nav-link">Blog</a></li>
         </ul>
       </nav>
       <div class="auth-buttons">
-        <!-- Ajustamos para que sean botones con IDs reconocibles por main.js/scripts.js -->
         <button class="btn login-btn"    id="loginBtn">Login</button>
         <button class="btn register-btn" id="registerBtn">Register</button>
+        <button
+          id="logoutBtn"
+          class="btn logout-btn"
+          style="display: none;"
+        >
+          Logout
+        </button>
+        <a 
+          href="/pages/profile.html"
+          class="nav-link"
+          id="profileLink"
+          style="display:none;"
+        >
+          Mi Cuenta
+        </a>
+        <span
+          id="userNameSpan"
+          style="margin-left: 15px; color: #fff; font-weight: bold;"
+        ></span>
       </div>
     </div>
   </header>
@@ -112,14 +132,14 @@
           <div class="product-image-placeholder"></div>
           <h3 class="product-title">Firestop Voids</h3>
           <p class="product-description">
-            Automatiza la carga de información desde Excel a las familias de Revit.
+            Automatiza la carga de información desde Excel ...
           </p>
         </div>
         <div class="product-card">
           <div class="product-image-placeholder"></div>
           <h3 class="product-title">Architectural Finishes</h3>
           <p class="product-description">
-            Genera vacíos automáticamente para evitar interferencias en muros y placas.
+            Genera vacíos automáticamente ...
           </p>
         </div>
         <div class="product-card">
@@ -133,21 +153,21 @@
           <div class="product-image-placeholder"></div>
           <h3 class="product-title">Structural Framing Voids</h3>
           <p class="product-description">
-            Identifica disciplinas, edificios y vistas para completar rótulos automáticamente.
+            Identifica disciplinas, edificios y vistas ...
           </p>
         </div>
         <div class="product-card">
           <div class="product-image-placeholder"></div>
           <h3 class="product-title">Element Consecutive</h3>
           <p class="product-description">
-            Identifica disciplinas, edificios y vistas para completar rótulos automáticamente.
+            Identifica disciplinas, edificios y vistas ...
           </p>
         </div>
         <div class="product-card">
           <div class="product-image-placeholder"></div>
           <h3 class="product-title">Parameter Value</h3>
           <p class="product-description">
-            Identifica disciplinas, edificios y vistas para completar rótulos automáticamente.
+            Identifica disciplinas, edificios y vistas ...
           </p>
         </div>
       </div>
@@ -157,53 +177,49 @@
     <section class="products-section">
       <h2 class="section-title">Custom BIM</h2>
       <p class="section-description">
-        Aplicaciones configurables diseñadas para asegurar que tus modelos Revit cumplan con
-        los estándares y requisitos BIM.
+        Aplicaciones configurables diseñadas para asegurar que tus modelos Revit cumplan ...
       </p>
       <div class="products-grid">
         <div class="product-card">
           <div class="product-image-placeholder"></div>
           <h3 class="product-title">BEP Revisor</h3>
           <p class="product-description">
-            Evalúa estándares como nomenclaturas, coordenadas, worksets, sistemas y warnings
-            para garantizar la calidad de un modelo.
+            Evalúa estándares como nomenclaturas, coordenadas ...
           </p>
         </div>
         <div class="product-card">
           <div class="product-image-placeholder"></div>
           <h3 class="product-title">Sheet Revisor</h3>
           <p class="product-description">
-            Verifica que los planos cumplan con estándares gráficos, como escalas, disciplinas
-            y llenado correcto de información.
+            Verifica que los planos cumplan con estándares ...
           </p>
         </div>
         <div class="product-card">
           <div class="product-image-placeholder"></div>
           <h3 class="product-title">Sheet Modifier</h3>
           <p class="product-description">
-            Inspecciona las familias para asegurarse de que incluyen datos completos, como
-            códigos de montaje y parámetros necesarios.
+            Inspecciona las familias para asegurarse ...
           </p>
         </div>
         <div class="product-card">
           <div class="product-image-placeholder"></div>
           <h3 class="product-title">Dictionary</h3>
           <p class="product-description">
-            Inspecciona las familias para asegurarse de que incluyen datos completos, etc.
+            Inspecciona las familias ...
           </p>
         </div>
         <div class="product-card">
           <div class="product-image-placeholder"></div>
           <h3 class="product-title">Coordinates</h3>
           <p class="product-description">
-            Inspecciona las familias para asegurarse de que incluyen datos completos, etc.
+            Inspecciona las familias ...
           </p>
         </div>
         <div class="product-card">
           <div class="product-image-placeholder"></div>
           <h3 class="product-title">Multi-Model Report</h3>
           <p class="product-description">
-            Inspecciona las familias para asegurarse de que incluyen datos completos, etc.
+            Inspecciona las familias ...
           </p>
         </div>
       </div>
@@ -217,9 +233,9 @@
   <!-- Scripts para login/register y auth -->
   <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
   <script src="../assets/js/scripts.js"></script>
-  <script src="../assets/js/main.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      initAuthButtons();
       checkAuthAndUpdateUI();
     });
   </script>

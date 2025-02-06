@@ -7,7 +7,42 @@
 </head>
 <body>
   <header class="header">
-    <!-- ... -->
+    <div class="header-container">
+      <div class="logo">
+        <img src="https://cdn-aps-app.s3.us-east-2.amazonaws.com/Logo_SinFondo.png" alt="Logo" class="logo-image">
+      </div>
+      <nav class="nav">
+        <ul class="nav-list">
+          <li><a href="../index.html" class="nav-link">Home</a></li>
+          <li><a href="../pages/products.html" class="nav-link">Products</a></li>
+          <li><a href="../pages/portfolio.html" class="nav-link">Portfolio</a></li>
+          <li><a href="../pages/company.html" class="nav-link">Company</a></li>
+          <li><a href="../pages/company.html" class="nav-link">Contact</a></li>
+          <li><a href="../pages/company.html" class="nav-link">Blog</a></li>
+          <li>
+            <a href="/pages/profile.html"
+               class="nav-link"
+               id="profileLink"
+               style="display:none;">Mi Cuenta</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="auth-buttons">
+        <button class="btn login-btn"    id="loginBtn">Login</button>
+        <button class="btn register-btn" id="registerBtn">Register</button>
+        <button
+          id="logoutBtn"
+          class="btn logout-btn"
+          style="display: none;"
+        >
+          Logout
+        </button>
+        <span
+          id="userNameSpan"
+          style="margin-left: 15px; color: #fff; font-weight: bold;"
+        ></span>
+      </div>
+    </div>
   </header>
 
   <main class="profile-main">
@@ -35,16 +70,17 @@
   <script src="../assets/js/scripts.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      initAuthButtons();
       checkAuthAndUpdateUI();
 
-      // Revisar si Cognito devolvió ?code=
+      // Revisar si Cognito devolvió ?code=...
       const urlParams = new URLSearchParams(window.location.search);
       const authCode = urlParams.get('code');
 
       if (authCode) {
         exchangeCodeForTokens(authCode);
       } else {
-        // Si ya tenemos token => cargar licencias
+        // Si no hay code pero tenemos tokens => cargar licencias
         const accessToken = sessionStorage.getItem('accessToken');
         if (accessToken) {
           loadLicenses(accessToken);
@@ -54,91 +90,6 @@
         }
       }
     });
-
-    function exchangeCodeForTokens(code) {
-      fetch(`https://api.ottoapis.com/exchangeCode?code=${code}`)
-        .then(resp => resp.json())
-        .then(data => {
-          if (data.error) {
-            console.error("Error en exchangeCode:", data.error);
-            return;
-          }
-          // Guardar tokens
-          sessionStorage.setItem('accessToken', data.access_token);
-          sessionStorage.setItem('idToken', data.id_token);
-
-          // Quitar el ?code de la URL
-          window.history.replaceState({}, document.title, window.location.pathname);
-
-          checkAuthAndUpdateUI();
-          loadLicenses(data.access_token);
-        })
-        .catch(err => {
-          console.error("Error en intercambio de code:", err);
-        });
-    }
-
-    function loadLicenses(accessToken) {
-      const decoded = jwt_decode(accessToken);
-      const userSub = decoded.sub;
-      if (!userSub) {
-        console.error("Token sin 'sub'");
-        return;
-      }
-
-      const url = `https://api.ottoapis.com/usuarios/${userSub}/licencias`;
-      fetch(url, {
-        headers: { Authorization: `Bearer ${accessToken}` }
-      })
-      .then(r => r.json())
-      .then(data => {
-        const licenses = data.items || data;
-        renderLicenses(licenses);
-      })
-      .catch(err => console.error("Error al cargar licencias:", err));
-    }
-
-    function renderLicenses(licenses) {
-      const tbody = document.getElementById('licensesTable').querySelector('tbody');
-      tbody.innerHTML = '';
-
-      licenses.forEach(lic => {
-        const tr = document.createElement('tr');
-
-        // Nombre
-        const tdName = document.createElement('td');
-        tdName.textContent = lic.name || lic.product_id || 'N/A';
-        tr.appendChild(tdName);
-
-        // Status
-        const tdStatus = document.createElement('td');
-        if (lic.expires_at) {
-          const expDate = new Date(lic.expires_at);
-          tdStatus.textContent = expDate > new Date() ? 'Activa' : 'Inactiva';
-        } else {
-          tdStatus.textContent = 'Desconocido';
-        }
-        tr.appendChild(tdStatus);
-
-        // Fecha
-        const tdExp = document.createElement('td');
-        tdExp.textContent = lic.expires_at || '';
-        tr.appendChild(tdExp);
-
-        // Días restantes
-        const tdDays = document.createElement('td');
-        if (lic.expires_at) {
-          const diffMs = new Date(lic.expires_at) - new Date();
-          const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
-          tdDays.textContent = diffDays <= 0 ? 'Expirada' : diffDays;
-        } else {
-          tdDays.textContent = '';
-        }
-        tr.appendChild(tdDays);
-
-        tbody.appendChild(tr);
-      });
-    }
   </script>
 </body>
 </html>

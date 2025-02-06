@@ -89,8 +89,10 @@
   <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
   <script src="../assets/js/scripts.js"></script>
   <script>
-    // Al cargar la página, revisamos si ya hay tokens
     document.addEventListener('DOMContentLoaded', () => {
+      // 1) Inicializamos handlers: login, register
+      initAuthButtons();
+      // 2) Revisamos si hay tokens y actualizamos la cabecera
       checkAuthAndUpdateUI();
     });
   </script>
