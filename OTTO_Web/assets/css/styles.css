@@ -508,3 +508,127 @@
 .licenses-table tbody tr:nth-child(even) {
   background-color: #fafafa;
 }
+/* ==============================
+   CONTACT
+============================== */
+
+/* Contenedor principal del bloque de contacto */
+.cfquestion {
+  position: relative;
+  top: 4vh;
+  max-width: 70%;
+  margin: 0 auto; 
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  
+  /* Ajusta estos dos para igualar la altura a la primera imagen */
+  min-height: 45vh; /* o la altura que quieras */
+  align-items: center; /* centra verticalmente el contenido */
+
+  /* 2 columnas: texto izquierda + formulario derecha */
+  display: flex;
+  justify-content: space-between;
+}
+
+/***** TEXTO IZQUIERDA *****/
+.cf_inner_content {
+  
+  width: 35%;
+  margin-bottom: 20px;
+}
+.cf_inner_title p {
+  margin: 0;
+  padding: 0;
+  color: #113D7B;     /* Color principal (azul marino) */
+  font-weight: 600;
+  font-size: 24px;    /* Tamaño del titular principal */
+  line-height: 1.3em;
+  margin-bottom: 10px;
+}
+
+/***** FORMULARIO DERECHA *****/
+.et_pb_column_8 {
+  width: 55%;
+  margin: 0;
+}
+
+/***** CAMPOS DEL FORMULARIO *****/
+/* Nombre - mitad izquierda */
+.et_pb_contact_field.et_pb_contact_field_0.et_pb_contact_field_half {
+  float: left;
+  width: 48%;
+  margin-bottom: 20px;
+  margin-right: 4%;
+  box-sizing: border-box;
+}
+
+/* E-mail - mitad derecha */
+.et_pb_contact_field.et_pb_contact_field_1.et_pb_contact_field_half.et_pb_contact_field_last {
+  float: right;
+  width: 48%;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+/* Pregunta - debajo, 100% del ancho */
+.et_pb_contact_field.et_pb_contact_field_2.et_pb_contact_field_last {
+  clear: both;
+  width: 100%;
+  margin-bottom: 20px;
+  max-height: 60vh;
+  box-sizing: border-box;
+}
+
+/* Inputs y textarea */
+.input,
+.et_pb_contact_message {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+/* Botón SEND alineado a la derecha */
+.et_contact_bottom_container {
+  text-align: right;
+}
+.et_pb_contact_submit {
+  border: 2px solid #113D7B;
+  background: #fff;
+  color: #113D7B;
+  padding: 10px 25px;
+  border-radius: 50px;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.et_pb_contact_submit:hover {
+  background: #113D7B;
+  color: #fff;
+}
+.et_pb_contact_field.et_pb_contact_field_2.et_pb_contact_field_last textarea {
+  height: 150px;
+}
+/* Limpieza de flotados */
+.et_contact_bottom_container::after,
+.et_pb_contact_form.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* Footer a ancho completo y fijo (opcional) */
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  text-align: center;
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+}
