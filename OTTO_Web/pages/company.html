@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OTTO - Company</title>
   <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
@@ -23,27 +22,28 @@
           <li><a href="../pages/portfolio.html" class="nav-link">Portfolio</a></li>
           <li><a href="../pages/company.html" class="nav-link active">Company</a></li>
           <li><a href="../pages/contact.html" class="nav-link">Contact</a></li>
-          <li><a href="../pages/company.html" class="nav-link">Blog</a></li>
+          <li><a href="../pages/blog.html" class="nav-link">Blog</a></li>
+          <li>
+            <a href="/pages/profile.html"
+               class="nav-link"
+               id="profileLink"
+               style="display:none;">Mi Cuenta</a>
+          </li>
         </ul>
       </nav>
       <div class="auth-buttons">
+        <!-- Sustituimos los <a> por <button> -->
         <button class="btn login-btn"    id="loginBtn">Login</button>
         <button class="btn register-btn" id="registerBtn">Register</button>
+        
         <button
           id="logoutBtn"
           class="btn logout-btn"
           style="display: none;"
+          onclick="doLogout()"
         >
           Logout
         </button>
-        <a 
-          href="/pages/profile.html"
-          class="nav-link"
-          id="profileLink"
-          style="display:none;"
-        >
-          Mi Cuenta
-        </a>
         <span
           id="userNameSpan"
           style="margin-left: 15px; color: #fff; font-weight: bold;"

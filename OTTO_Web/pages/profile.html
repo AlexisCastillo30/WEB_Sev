@@ -18,22 +18,25 @@
           <li><a href="../pages/portfolio.html" class="nav-link">Portfolio</a></li>
           <li><a href="../pages/company.html" class="nav-link">Company</a></li>
           <li><a href="../pages/contact.html" class="nav-link">Contact</a></li>
-          <li><a href="../pages/company.html" class="nav-link">Blog</a></li>
+          <li><a href="../pages/blog.html" class="nav-link">Blog</a></li>
           <li>
             <a href="/pages/profile.html"
-               class="nav-link"
+               class="nav-link active"
                id="profileLink"
                style="display:none;">Mi Cuenta</a>
           </li>
         </ul>
       </nav>
       <div class="auth-buttons">
+        <!-- Sustituimos los <a> por <button> -->
         <button class="btn login-btn"    id="loginBtn">Login</button>
         <button class="btn register-btn" id="registerBtn">Register</button>
+        
         <button
           id="logoutBtn"
           class="btn logout-btn"
           style="display: none;"
+          onclick="doLogout()"
         >
           Logout
         </button>
@@ -45,7 +48,7 @@
     </div>
   </header>
 
-  <main class="profile-main">
+  <main class="main">
     <h1>Perfil de Usuario</h1>
     <h2>Licencias</h2>
     <table id="licensesTable" class="licenses-table">
@@ -61,8 +64,8 @@
     </table>
   </main>
 
-  <footer>
-    <p>© 2025 TuCompañía</p>
+  <footer class="footer">
+    <p class="footer-text">© 2025 OTTO. All rights reserved. Proudly based in Colombia.</p>
   </footer>
 
   <!-- Scripts -->

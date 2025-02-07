@@ -139,15 +139,13 @@
     color: #555;
   }
   
-  footer {
+  footer {    
     text-align: center;
-    padding: 20px;
     background-color: #333;
     color: #fff;
-    margin-top: 40px;
+    padding: 20px;
   }
   
-
 
   /* Product grid styles */
 .products-grid {
@@ -621,14 +619,4 @@
   display: table;
   clear: both;
 }
-/* Footer a ancho completo y fijo (opcional) */
-footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  left: 0;
-  text-align: center;
-  background-color: #333;
-  color: #fff;
-  padding: 20px;
-}
+

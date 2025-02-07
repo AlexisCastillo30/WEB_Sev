@@ -3,11 +3,9 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OTTO - Products</title>
+  <title>OTTO - Contact</title>
   <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
-
 <body>
   <header class="header">
     <div class="header-container">
@@ -17,106 +15,124 @@
       <nav class="nav">
         <ul class="nav-list">
           <li><a href="../index.html" class="nav-link">Home</a></li>
-          <li><a href="../pages/products.html" class="nav-link active">Products</a></li>
+          <li><a href="../pages/products.html" class="nav-link">Products</a></li>
           <li><a href="../pages/portfolio.html" class="nav-link">Portfolio</a></li>
           <li><a href="../pages/company.html" class="nav-link">Company</a></li>
-          <li><a href="../pages/contact.html" class="nav-link">Contact</a></li>
-          <li><a href="../pages/company.html" class="nav-link">Blog</a></li>
+          <li><a href="../pages/contact.html" class="nav-link active">Contact</a></li>
+          <li><a href="../pages/blog.html" class="nav-link">Blog</a></li>
+          <li>
+            <a href="/pages/profile.html"
+               class="nav-link"
+               id="profileLink"
+               style="display:none;">Mi Cuenta</a>
+          </li>
         </ul>
       </nav>
       <div class="auth-buttons">
-        <button class="btn login-btn" id="loginBtn">Login</button>
+        <!-- Sustituimos los <a> por <button> -->
+        <button class="btn login-btn"    id="loginBtn">Login</button>
         <button class="btn register-btn" id="registerBtn">Register</button>
-        <button id="logoutBtn" class="btn logout-btn" style="display: none;">
+        
+        <button
+          id="logoutBtn"
+          class="btn logout-btn"
+          style="display: none;"
+          onclick="doLogout()"
+        >
           Logout
         </button>
-        <a href="/pages/profile.html" class="nav-link" id="profileLink" style="display:none;">
-          Mi Cuenta
-        </a>
-        <span id="userNameSpan" style="margin-left: 15px; color: #fff; font-weight: bold;"></span>
+        <span
+          id="userNameSpan"
+          style="margin-left: 15px; color: #fff; font-weight: bold;"
+        ></span>
       </div>
     </div>
   </header>
-  <div class="cfquestion">
-    <div class="cf_inner_content">
-      <div class="cf_inner_title">
-        <p>¿Tienes alguna pregunta?</p><br>
-      </div>
-      <div class="cf_inner_text">
-        <p>Si tiene alguna pregunta sobre nuestros servicios, llene el formulario y nos estaremos contactando</p><br>
-      </div>
-    </div>
-    
-    <div class="et_pb_column et_pb_column_2_3 et_pb_column_8  et_pb_css_mix_blend_mode_passthrough et-last-child">
-      <div id="et_pb_contact_form_0" 
-           class="et_pb_module et_pb_contact_form_0 et_pb_contact_form_container clearfix"
-           data-form_unique_num="0" 
-           data-form_unique_id="54dd8993-1cd5-4063-9f9f-12e271e5e3f8">
-  
-        <div class="et-pb-contact-message"></div>
-  
-        <div class="et_pb_contact">
-          <form class="et_pb_contact_form clearfix" method="post" action="https://ottoapis.com/">
-            
-            <!-- Nombre (mitad izquierda) -->
-            <p class="et_pb_contact_field et_pb_contact_field_0 et_pb_contact_field_half"
-               data-id="name" data-type="input">
-              <input type="text" id="et_pb_contact_name_0" class="input" value=""
-                     name="et_pb_contact_name_0" placeholder="Nombre" />
-            </p>
-            
-            <!-- E-mail (mitad derecha) -->
-            <p class="et_pb_contact_field et_pb_contact_field_1 et_pb_contact_field_half et_pb_contact_field_last"
-               data-id="email" data-type="email">
-              <input type="text" id="et_pb_contact_email_0" class="input" value=""
-                     name="et_pb_contact_email_0" placeholder="E-mail" />
-            </p>
-            
-            <!-- Pregunta (debajo, ancho 100%) -->
-            <p class="et_pb_contact_field et_pb_contact_field_2 et_pb_contact_field_last"
-               data-id="message" data-type="text">
-              <textarea name="et_pb_contact_message_0" 
-                        id="et_pb_contact_message_0"
-                        class="et_pb_contact_message input"
-                        placeholder="Pregunta"></textarea>
-            </p>
-            
-            <input type="hidden" value="et_contact_proccess" name="et_pb_contactform_submit_0">
-            
-            <!-- Contenedor del botón “SEND” -->
-            <div class="et_contact_bottom_container">
-              <button type="submit" name="et_builder_submit_button"
-                      class="et_pb_contact_submit et_pb_button">
-                SEND
-              </button>
-            </div>
-            
-            <input type="hidden" 
-                   id="_wpnonce-et-pb-contact-form-submitted-0"
-                   name="_wpnonce-et-pb-contact-form-submitted-0" 
-                   value="3839e87f43">
-            <input type="hidden"
-                   name="_wp_http_referer" 
-                   value="/contacts/">
-          </form>
-        </div> <!-- .et_pb_contact -->
-      </div> <!-- .et_pb_contact_form_container -->
-    </div> <!-- .et_pb_column_8 -->
-  </div> <!-- .cfquestion -->
-    
 
-    <!-- Scripts para login/register y auth -->
-    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
-    <script src="../assets/js/scripts.js"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        initAuthButtons();
-        checkAuthAndUpdateUI();
-      });
-    </script>
+  <main class="main">
+    <div class="cfquestion">
+      <div class="cf_inner_content">
+        <div class="cf_inner_title">
+          <p>¿Tienes alguna pregunta?</p><br>
+        </div>
+        <div class="cf_inner_text">
+          <p>Si tiene alguna pregunta sobre nuestros servicios, llene el formulario y nos estaremos contactando</p><br>
+        </div>
+      </div>      
+      <div class="et_pb_column et_pb_column_2_3 et_pb_column_8  et_pb_css_mix_blend_mode_passthrough et-last-child">
+        <div id="et_pb_contact_form_0" 
+            class="et_pb_module et_pb_contact_form_0 et_pb_contact_form_container clearfix"
+            data-form_unique_num="0" 
+            data-form_unique_id="54dd8993-1cd5-4063-9f9f-12e271e5e3f8">
+    
+          <div class="et-pb-contact-message"></div>
+    
+          <div class="et_pb_contact">
+            <form class="et_pb_contact_form clearfix" method="post" action="https://ottoapis.com/">
+              
+              <!-- Nombre (mitad izquierda) -->
+              <p class="et_pb_contact_field et_pb_contact_field_0 et_pb_contact_field_half"
+                data-id="name" data-type="input">
+                <input type="text" id="et_pb_contact_name_0" class="input" value=""
+                      name="et_pb_contact_name_0" placeholder="Nombre" />
+              </p>
+              
+              <!-- E-mail (mitad derecha) -->
+              <p class="et_pb_contact_field et_pb_contact_field_1 et_pb_contact_field_half et_pb_contact_field_last"
+                data-id="email" data-type="email">
+                <input type="text" id="et_pb_contact_email_0" class="input" value=""
+                      name="et_pb_contact_email_0" placeholder="E-mail" />
+              </p>
+              
+              <!-- Pregunta (debajo, ancho 100%) -->
+              <p class="et_pb_contact_field et_pb_contact_field_2 et_pb_contact_field_last"
+                data-id="message" data-type="text">
+                <textarea name="et_pb_contact_message_0" 
+                          id="et_pb_contact_message_0"
+                          class="et_pb_contact_message input"
+                          placeholder="Pregunta"></textarea>
+              </p>
+              
+              <input type="hidden" value="et_contact_proccess" name="et_pb_contactform_submit_0">
+              
+              <!-- Contenedor del botón “SEND” -->
+              <div class="et_contact_bottom_container">
+                <button type="submit" name="et_builder_submit_button"
+                        class="et_pb_contact_submit et_pb_button">
+                  SEND
+                </button>
+              </div>
+              
+              <input type="hidden" 
+                    id="_wpnonce-et-pb-contact-form-submitted-0"
+                    name="_wpnonce-et-pb-contact-form-submitted-0" 
+                    value="3839e87f43">
+              <input type="hidden"
+                    name="_wp_http_referer" 
+                    value="/contacts/">
+            </form>
+          </div> <!-- .et_pb_contact -->
+        </div> <!-- .et_pb_contact_form_container -->
+      </div> <!-- .et_pb_column_8 -->
+    </div> <!-- .cfquestion -->
+    
+  </main>
+
+
+  <footer class="footer">
+    <p class="footer-text">© 2025 OTTO. All rights reserved. Proudly based in Colombia.</p>
+  </footer>
+
+  <!-- Scripts para login/register y auth -->
+  <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+  <script src="../assets/js/scripts.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initAuthButtons();
+      checkAuthAndUpdateUI();
+    });
+  </script>
 </body>
-<footer class="footer">
-  <p class="footer-text">© 2025 OTTO. All rights reserved.</p>
-</footer>
+
 
 </html>
