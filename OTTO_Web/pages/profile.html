@@ -73,19 +73,19 @@
       initAuthButtons();
       checkAuthAndUpdateUI();
 
-      // Revisar si Cognito devolvió ?code=...
+      // Si Cognito devolvió ?code=...
       const urlParams = new URLSearchParams(window.location.search);
       const authCode = urlParams.get('code');
 
       if (authCode) {
         exchangeCodeForTokens(authCode);
       } else {
-        // Si no hay code pero tenemos tokens => cargar licencias
+        // Si no hay code, pero tenemos tokens => cargar licencias
         const accessToken = sessionStorage.getItem('accessToken');
         if (accessToken) {
           loadLicenses(accessToken);
         } else {
-          // Forzar login
+          // Forzar login si no hay code ni tokens
           window.location.href = 'https://api.ottoapis.com/auth/login';
         }
       }

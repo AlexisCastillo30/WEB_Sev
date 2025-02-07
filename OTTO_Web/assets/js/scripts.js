@@ -2,48 +2,29 @@
  * scripts.js - Lógica de autenticación y profile
  **********************************************/
 
-// Inicializa lógica de Login/Register/Logout
 function initAuthButtons() {
   const loginBtn    = document.getElementById('loginBtn');
   const registerBtn = document.getElementById('registerBtn');
 
-  const accessToken = sessionStorage.getItem('accessToken');
-  const idToken     = sessionStorage.getItem('idToken');
-
-  if (accessToken && idToken) {
-    // Logueado => El botón de login se comporta como "Logout"
-    if (loginBtn) {
-      loginBtn.textContent = 'Logout';
-      loginBtn.onclick = () => {
-        doLogout();
-      };
-    }
-    // Ocultamos el registerBtn si estás logueado
-    if (registerBtn) {
-      registerBtn.style.display = 'none';
-    }
-  } else {
-    // No logueado => el botón es "Login"
-    if (loginBtn) {
-      loginBtn.textContent = 'Login';
-      loginBtn.onclick = () => {
-        window.location.replace('https://api.ottoapis.com/auth/login');
-      };
-    }
-    // register => signup
-    if (registerBtn) {
-      registerBtn.style.display = 'inline-block';
-      registerBtn.onclick = () => {
-        window.location.replace('https://api.ottoapis.com/auth/signup');
-      };
-    }
+  // Asignamos listeners fijos, SIN condicionar con tokens
+  if (loginBtn) {
+    // Al hacer clic, vamos a /auth/login
+    loginBtn.onclick = () => {
+      window.location.replace('https://api.ottoapis.com/auth/login');
+    };
+  }
+  if (registerBtn) {
+    // Al hacer clic, vamos a /auth/signup (si lo tienes configurado)
+    registerBtn.onclick = () => {
+      window.location.replace('https://api.ottoapis.com/auth/signup');
+    };
   }
 }
 
 /**
  * checkAuthAndUpdateUI()
  * - Muestra/oculta botones (login, register, logout, Mi Cuenta)
- * - Muestra email en userNameSpan si logueado
+ * - Decodifica idToken para mostrar el email en userNameSpan si logueado
  */
 function checkAuthAndUpdateUI() {
   const loginBtn    = document.getElementById('loginBtn');
@@ -52,34 +33,37 @@ function checkAuthAndUpdateUI() {
   const logoutBtn   = document.getElementById('logoutBtn');
   const userNameSpan= document.getElementById('userNameSpan');
 
+  // Leer tokens
   const accessToken = sessionStorage.getItem('accessToken');
   const idToken     = sessionStorage.getItem('idToken');
 
   if (accessToken && idToken) {
-    // Usuario logueado
+    // Usuario logueado => ocultamos Login/Register, mostramos Logout / Mi Cuenta
     if (loginBtn)    loginBtn.style.display    = 'none';
     if (registerBtn) registerBtn.style.display = 'none';
+
     if (profileLink) profileLink.style.display = 'inline-block';
+
     if (logoutBtn) {
       logoutBtn.style.display = 'inline-block';
       logoutBtn.onclick = () => doLogout();
     }
 
-    // Muestra email
+    // Mostramos el email del idToken (decodificación JWT)
     try {
       const decoded = jwt_decode(idToken);
-      if (decoded && decoded.email && userNameSpan) {
+      if (decoded && decoded.email) {
         userNameSpan.textContent = decoded.email;
-      } else if (userNameSpan) {
+      } else {
         userNameSpan.textContent = 'Usuario';
       }
     } catch (err) {
       console.error('Error decodificando idToken:', err);
-      if (userNameSpan) userNameSpan.textContent = 'Usuario';
+      userNameSpan.textContent = 'Usuario';
     }
 
   } else {
-    // No logueado
+    // Usuario NO logueado => mostrar Login/Register, ocultar Logout/Mi Cuenta
     if (loginBtn)    loginBtn.style.display    = 'inline-block';
     if (registerBtn) registerBtn.style.display = 'inline-block';
     if (profileLink) profileLink.style.display = 'none';
@@ -94,6 +78,7 @@ function checkAuthAndUpdateUI() {
  */
 function doLogout() {
   sessionStorage.clear();
+  // Ajusta a tu API /auth/logout
   window.location.href = 'https://api.ottoapis.com/auth/logout';
 }
 
@@ -105,16 +90,17 @@ function exchangeCodeForTokens(code) {
     .then(resp => resp.json())
     .then(data => {
       if (data.error) {
-        console.error("Error en exchangeCode:", data.error);
+        console.error("Error en /exchangeCode:", data.error);
         return;
       }
       // Guardar tokens
       sessionStorage.setItem('accessToken', data.access_token);
-      sessionStorage.setItem('idToken', data.id_token);
+      sessionStorage.setItem('idToken',     data.id_token);
 
-      // Quitar ?code de la URL
+      // Quitar ?code= de la URL
       window.history.replaceState({}, document.title, window.location.pathname);
 
+      // Actualizamos la UI y cargamos licencias
       checkAuthAndUpdateUI();
       loadLicenses(data.access_token);
     })
@@ -131,6 +117,7 @@ function loadLicenses(accessToken) {
     return;
   }
 
+  // GET /usuarios/{userSub}/licencias con Bearer
   const url = `https://api.ottoapis.com/usuarios/${userSub}/licencias`;
   fetch(url, {
     headers: { Authorization: `Bearer ${accessToken}` }
@@ -144,6 +131,9 @@ function loadLicenses(accessToken) {
 }
 
 function renderLicenses(licenses) {
+  // Definimos 'now' al inicio de la función
+  const now = new Date();
+
   const tbody = document
     .getElementById('licensesTable')
     .querySelector('tbody');
@@ -162,13 +152,13 @@ function renderLicenses(licenses) {
     const tdStatus = document.createElement('td');
     if (lic.expires_at) {
       const expDate = new Date(lic.expires_at);
-      tdStatus.textContent = (expDate > new Date()) ? 'Activa' : 'Inactiva';
+      tdStatus.textContent = (expDate > now) ? 'Activa' : 'Inactiva';
     } else {
       tdStatus.textContent = 'Desconocido';
     }
     tr.appendChild(tdStatus);
 
-    // Fecha
+    // Fecha de vencimiento
     const tdExp = document.createElement('td');
     tdExp.textContent = lic.expires_at || '';
     tr.appendChild(tdExp);
@@ -176,9 +166,9 @@ function renderLicenses(licenses) {
     // Días restantes
     const tdDays = document.createElement('td');
     if (lic.expires_at) {
-      const diffMs = new Date(lic.expires_at) - new Date();
-      const diffDays = Math.ceil(diffMs / (1000*60*60*24));
-      tdDays.textContent = diffDays <= 0 ? 'Expirada' : diffDays;
+      const diffMs = new Date(lic.expires_at) - now;
+      const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+      tdDays.textContent = (diffDays <= 0) ? 'Expirada' : diffDays;
     } else {
       tdDays.textContent = '';
     }
