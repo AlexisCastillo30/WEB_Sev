@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>OTTO - Architectural Finishes</title>
+  <!-- CSS principal global -->
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+  <!-- (Opcional) CSS específico de esta app 
+       <link rel="stylesheet" href="../../assets/css/apps/architectural-finishes.css"> 
+  -->
+</head>
+<body>
+  <!-- HEADER (mismo que en index.html) -->
+  <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <img 
+          src="https://cdn-aps-app.s3.us-east-2.amazonaws.com/Logo_SinFondo.png" 
+          alt="Logo" 
+          class="logo-image"
+        >        
+      </div>
+
+      <nav class="nav">
+        <ul class="nav-list">
+          <li><a href="../../index.html" class="nav-link">Home</a></li>
+
+          <!-- Menú desplegable en "Products" -->
+          <li class="nav-item dropdown">
+            <!-- OJO: si quieres que "Products" lleve también a products.html, 
+                 puedes usar <a href="../../pages/products.html">, 
+                 o simplemente '#' si no quieres linkar.
+            -->
+            <a href="../../pages/products.html" class="nav-link active">Products</a>
+
+            <!-- Contenedor del mega menú -->
+            <div class="dropdown-content">
+              <!-- Primera columna: WEB API's -->
+              <div class="dropdown-column">
+                <h4>WEB API's</h4>
+                <ul>
+                  <li><a href="../../pages/apps/bep-revisor-3d.html">BEP Revisor (3D)</a></li>
+                  <li><a href="../../pages/apps/web-clash-status-3d.html">WEB Clash Status (3D)</a></li>
+                  <li><a href="../../pages/apps/planing-4d.html">Planing (4D)</a></li>
+                  <li><a href="../../pages/apps/quantities-5d.html">Quantities (5D)</a></li>
+                  <li><a href="../../pages/apps/carbon-footprint-6d.html">Carbon Footprint (6D)</a></li>
+                  <li><a href="../../pages/apps/digital-twins.html">Digital Twins - IoT (7D)</a></li>
+                  <li><a href="../../pages/apps/multiple-formats-acc-exporter.html">Multiple Formats ACC Exporter</a></li>
+                </ul>
+              </div>
+      
+              <!-- Segunda columna: Revit API's Modeling -->
+              <div class="dropdown-column">
+                <h4>Revit API's Modeling</h4>
+                <ul>
+                  <li><a href="../../pages/apps/firestop-voids.html">Firestop Voids</a></li>
+                  <li><a href="../../pages/apps/architectural-finishes.html">Architectural Finishes</a></li>
+                  <li><a href="../../pages/apps/non-structural-elements.html">Non-Structural Elements (Dovelas)</a></li>
+                  <li><a href="../../pages/apps/structural-framing-voids.html">Structural Framing Voids</a></li>
+                  <li><a href="../../pages/apps/element-consecutive.html">Element Consecutive</a></li>
+                  <li><a href="../../pages/apps/parameter-value.html">Parameter Value</a></li>
+                </ul>
+              </div>
+      
+              <!-- Tercera columna: Custom BIM -->
+              <div class="dropdown-column">
+                <h4>Custom BIM</h4>
+                <ul>
+                  <li><a href="../../pages/apps/bep-revisor.html">BEP Revisor</a></li>
+                  <li><a href="../../pages/apps/sheet-revisor.html">Sheet Revisor</a></li>
+                  <li><a href="../../pages/apps/sheet-modifier.html">Sheet Modifier</a></li>
+                  <li><a href="../../pages/apps/dictionary.html">Dictionary</a></li>
+                  <li><a href="../../pages/apps/coordinates.html">Coordinates</a></li>
+                  <li><a href="../../pages/apps/multi-model-report.html">Multi-Model Report</a></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+
+          <li><a href="../../pages/portfolio.html" class="nav-link">Portfolio</a></li>
+          <li><a href="../../pages/company.html"   class="nav-link">Company</a></li>
+          <li><a href="../../pages/contact.html"   class="nav-link">Contact</a></li>
+          <li><a href="../../pages/blog.html"      class="nav-link">Blog</a></li>
+          <li>
+            <a href="../../pages/profile.html"
+               class="nav-link"
+               id="profileLink"
+               style="display:none;">Mi Cuenta</a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="auth-buttons">
+        <button class="btn login-btn"    id="loginBtn">Login</button>
+        <button class="btn register-btn" id="registerBtn">Register</button>
+        
+        <button
+          id="logoutBtn"
+          class="btn logout-btn"
+          style="display: none;"
+          onclick="doLogout()"
+        >
+          Logout
+        </button>
+        <span
+          id="userNameSpan"
+          style="margin-left: 15px; color: #fff; font-weight: bold;"
+        ></span>
+      </div>
+    </div>
+  </header>
+  
+  <!-- CONTENIDO PRINCIPAL DE LA APP -->
+  <main class="main">
+    <!-- Sección de cabecera de la app (imagen + descripción) -->
+    <section class="app-hero" style="display: flex; align-items: center; gap: 20px; margin-bottom: 40px;">
+      <!-- Imagen a la izquierda (o derecha, según prefieras) -->
+      <div style="flex: 1; text-align: center;">
+        <img 
+          src="https://via.placeholder.com/400x300" 
+          alt="Imagen Architectural Finishes"
+          style="max-width: 100%; border-radius: 8px;"
+        >
+      </div>
+      
+      <!-- Descripción y botones a la derecha -->
+      <div style="flex: 1;">
+        <h1 style="font-size: 2rem; margin-bottom: 15px;">Architectural Finishes</h1>
+        <p style="margin-bottom: 20px;">
+          Architectural Finishes es una herramienta de Revit® para automatizar la generación de acabados
+          en muros, pisos y techos. Ahorra tiempo y reduce errores al aplicar acabados arquitectónicos con reglas definidas.
+        </p>
+        <div style="display: flex; gap: 10px;">
+          <!-- Botón de compra -->
+          <button 
+            class="btn product-btn" 
+            onclick="buyApp('architectural-finishes')"
+            style="background-color: #28a745; border: none;"
+          >
+            Buy Now
+          </button>
+          <!-- Botón de descarga -->
+          <button 
+            class="btn product-btn" 
+            onclick="downloadApp('architectural-finishes')"
+            style="background-color: #007bff; border: none;"
+          >
+            Download
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección para el “video” dentro de una “pantalla” -->
+    <section class="app-video" style="text-align: center; margin-bottom: 40px;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 20px;">Demostración en Revit</h2>
+      <!-- Imagen simulando una pantalla, dentro el video embebido -->
+      <div style="
+        display: inline-block; 
+        background-image: url('https://via.placeholder.com/800x450'); 
+        background-size: cover;
+        background-position: center;
+        width: 800px;
+        height: 450px;
+        position: relative;"
+      >
+        <!-- Iframe o link de YouTube -->
+        <iframe 
+          src="https://www.youtube.com/embed/<VIDEO_ID>?rel=0" 
+          frameborder="0" 
+          allowfullscreen
+          style="width: 100%; height: 100%;"
+        ></iframe>
+      </div>
+    </section>
+
+    <!-- Sección con más detalles de la app (Lorem ipsum de ejemplo) -->
+    <section class="app-details" style="margin-bottom: 40px;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 20px;">Detalles Técnicos</h2>
+      <p style="max-width: 800px; margin: 0 auto;">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ac eros sit amet 
+        magna volutpat vestibulum. Phasellus in varius odio. Sed feugiat nisl ac ultrices 
+        condimentum. Donec ornare hendrerit purus ac fermentum. Morbi luctus mollis risus, 
+        at cursus nisi cursus et. Vestibulum ante ipsum primis in faucibus orci luctus et 
+        ultrices posuere cubilia curae; Proin sit amet ex elementum, consectetur nisl a, 
+        luctus urna. Phasellus placerat posuere quam, sed ultricies nunc rhoncus vel.
+      </p>
+    </section>
+
+    <!-- Sección de planes de precios -->
+    <section class="app-pricing" style="background-color: #f5f5f5; padding: 40px; text-align: center;">
+      <h2 style="font-size: 1.8rem; margin-bottom: 20px;">Planes de Licenciamiento</h2>
+      <p style="margin-bottom: 30px;">Elige el plan que mejor se adapte a tus necesidades.</p>
+
+      <div 
+        class="pricing-grid" 
+        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 1000px; margin: 0 auto;"
+      >
+        <!-- Plan 1 -->
+        <div style="background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+          <h3 style="margin-bottom: 15px;">Plan Básico</h3>
+          <p style="font-size: 1.5rem; font-weight: bold;">$69 / Mes</p>
+          <ul style="text-align: left; margin: 20px 0;">
+            <li>Funcionalidad principal de Architectural Finishes</li>
+            <li>Soporte básico por correo</li>
+            <li>Actualizaciones menores</li>
+          </ul>
+          <button 
+            class="btn product-btn" 
+            style="background-color: #28a745; border: none;"
+            onclick="buyPlan('basic')"
+          >
+            Buy Now
+          </button>
+        </div>
+
+        <!-- Plan 2 -->
+        <div style="background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+          <h3 style="margin-bottom: 15px;">Plan Profesional</h3>
+          <p style="font-size: 1.5rem; font-weight: bold;">$99 / Mes</p>
+          <ul style="text-align: left; margin: 20px 0;">
+            <li>Incluye todas las funciones de Architectural Finishes</li>
+            <li>Soporte prioritario</li>
+            <li>Actualizaciones mayores y menores</li>
+          </ul>
+          <button 
+            class="btn product-btn" 
+            style="background-color: #28a745; border: none;"
+            onclick="buyPlan('pro')"
+          >
+            Buy Now
+          </button>
+        </div>
+
+        <!-- Plan 3 -->
+        <div style="background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+          <h3 style="margin-bottom: 15px;">Plan Empresarial</h3>
+          <p style="font-size: 1.5rem; font-weight: bold;">$131 / Mes</p>
+          <ul style="text-align: left; margin: 20px 0;">
+            <li>Licencias flotantes para equipos grandes</li>
+            <li>Soporte 24/7 y asesoría personalizada</li>
+            <li>Actualizaciones completas + integraciones con otras apps</li>
+          </ul>
+          <button 
+            class="btn product-btn" 
+            style="background-color: #28a745; border: none;"
+            onclick="buyPlan('enterprise')"
+          >
+            Buy Now
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p class="footer-text">© 2025 OTTO. All rights reserved. Proudly based in Colombia.</p>
+  </footer>
+
+  <!-- SCRIPTS GLOBALES + SCRIPT PROPIO DE LA APP -->
+  <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+  <script src="../../assets/js/scripts.js"></script>
+  <!-- Ajustar nombre del JS a "architectural-finishes.js" si lo tienes -->
+  <script src="../../assets/js/apps/architectural-finishes.js"></script>
+  <script>
+    // Inicialización de botones de login/logout
+    document.addEventListener('DOMContentLoaded', () => {
+      initAuthButtons();
+      checkAuthAndUpdateUI();
+    });
+  </script>
+</body>
+</html>

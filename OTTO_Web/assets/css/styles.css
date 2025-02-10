@@ -620,3 +620,78 @@
   clear: both;
 }
 
+
+/* ******************************************** */
+/* botn apps */
+/* ******************************************** */
+
+.product-card {
+  position: relative; 
+  /* Para que el hover se vea fluido */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer; /* Si quieres mostrar mano al pasar */
+}
+
+.product-card:hover {
+  transform: scale(1.05); /* Efecto de agrandarse un poco */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Sombra suave */
+}
+
+
+/* ******************************************** */
+/* botn products */
+/* ******************************************** */
+
+
+/* Mega menú */
+.nav-item.dropdown {
+  position: relative;
+}
+
+.nav-item.dropdown .dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  width: 800px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  padding: 20px;
+  z-index: 999;
+}
+
+.nav-item.dropdown:hover .dropdown-content {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.dropdown-column {
+  flex: 1;
+}
+
+.dropdown-column h4 {
+  margin-bottom: 10px;
+  color: #081E32; /* Título de sección */
+  font-size: 1.1rem;
+}
+
+.dropdown-column ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-column li {
+  margin-bottom: 8px;
+}
+
+.dropdown-column a {
+  text-decoration: none;
+  color: #333;
+}
+
+.dropdown-column a:hover {
+  color: #00bfff;
+}
+
