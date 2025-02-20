@@ -162,13 +162,23 @@
     text-align: center;
   }
   
-  .product-image {
+  /* .product-image {
     width: 100%;
     height: auto;
     max-width: 150px;
     margin: 0 auto 15px;
-  }
+  } */
   
+
+  .product-image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    object-fit: cover; /* Ajusta la imagen para rellenar el ancho */
+  }
+
+
   .product-title {
     font-size: 1.25rem;
     margin: 10px 0;
@@ -442,6 +452,20 @@
     margin-bottom: 15px;
   }
   
+  /* tamaño de videos de pagina web*/
+
+  .module-video {
+    width: 100%;
+    height: 150px;             /* Fijamos la misma altura que tenía el placeholder */
+    border-radius: 5px;
+    object-fit: cover;         /* Recorta el video para ocupar bien el espacio */
+    margin-bottom: 15px;
+    background: #e0e0e0;       /* Color de fondo si el video tarda en cargar */
+  }
+  
+
+
+
   .module-title {
     font-size: 1.2rem;
     margin-bottom: 10px;
